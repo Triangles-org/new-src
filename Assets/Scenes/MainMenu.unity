@@ -605,6 +605,7 @@ GameObject:
   - component: {fileID: 322869784}
   - component: {fileID: 322869783}
   - component: {fileID: 322869782}
+  - component: {fileID: 322869785}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -714,6 +715,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 322869780}
   m_CullTransparentMesh: 1
+--- !u!114 &322869785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 322869780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77dc06bcc97db4033b6cd70f52cf499a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BouncyButton
 --- !u!1 &615943123
 GameObject:
   m_ObjectHideFlags: 0
@@ -1958,6 +1971,7 @@ GameObject:
   - component: {fileID: 1659033560}
   - component: {fileID: 1659033559}
   - component: {fileID: 1659033558}
+  - component: {fileID: 1659033561}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -2067,6 +2081,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1659033556}
   m_CullTransparentMesh: 1
+--- !u!114 &1659033561
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1659033556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77dc06bcc97db4033b6cd70f52cf499a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BouncyButton
 --- !u!1 &1667457743
 GameObject:
   m_ObjectHideFlags: 0
@@ -2307,6 +2333,7 @@ GameObject:
   - component: {fileID: 1894490108}
   - component: {fileID: 1894490107}
   - component: {fileID: 1894490106}
+  - component: {fileID: 1894490110}
   - component: {fileID: 1894490109}
   m_Layer: 5
   m_Name: Button
@@ -2430,6 +2457,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonToScene
   sceneName: CreatorLayerMenu
+--- !u!114 &1894490110
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1894490104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77dc06bcc97db4033b6cd70f52cf499a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BouncyButton
 --- !u!1 &2007924358
 GameObject:
   m_ObjectHideFlags: 0
