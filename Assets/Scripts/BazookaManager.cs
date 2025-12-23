@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using System.Text;
 using Newtonsoft.Json.Linq;
@@ -21,7 +22,7 @@ public class BazookaManager : MonoBehaviour
             if (!firstLoadDone)
             {
                 firstLoadDone = true;
-                Load();
+                saveFile = Load("savefile.json");
             }
         }
         else
@@ -32,20 +33,20 @@ public class BazookaManager : MonoBehaviour
 
     void OnApplicationQuit()
     {
-        Save();
+        Save("savefile.json", saveFile);
     }
 
     void OnApplicationPause(bool pause)
     {
         if (pause)
         {
-            Save();
+            Save("savefile.json", saveFile);
         }
     }
 
-    public void Load()
+    public JObject Load(String pathSuffix)
     {
-        string path = Path.Join(Application.persistentDataPath, "savefile.json");
+        string path = Path.Join(Application.persistentDataPath, pathSuffix);
         if (!File.Exists(path))
         {
             File.Create(path).Dispose();
@@ -55,24 +56,21 @@ public class BazookaManager : MonoBehaviour
             try
             {
                 var tempSaveFile = JObject.Parse(File.ReadAllText(path));
-                if (tempSaveFile != null) saveFile = tempSaveFile;
+                return tempSaveFile;
             }
             catch
             {
-                Application.Quit();
+                return null;
             }
         }
-        if (saveFile["version"] == null || saveFile["version"].ToString() != "0")
-        {
-            Application.Quit();
-        }
+        return null;
     }
 
-    public void Save()
+    public void Save(String pathSuffix, JObject data)
     {
-        string path = Path.Join(Application.persistentDataPath, "savefile.json");
+        string path = Path.Join(Application.persistentDataPath, pathSuffix);
         using var fileStream = new FileStream(path, FileMode.Create, FileAccess.Write, FileShare.None);
-        var encoded = Encoding.UTF8.GetBytes(saveFile.ToString(Newtonsoft.Json.Formatting.Indented));
+        var encoded = Encoding.UTF8.GetBytes(data.ToString(Newtonsoft.Json.Formatting.Indented));
         fileStream.Write(encoded, 0, encoded.Length);
         fileStream.Flush(true);
     }
@@ -83,6 +81,21 @@ public class BazookaManager : MonoBehaviour
         {
             ["version"] = "0"
         };
-        Save();
+        Save("savefile.json", saveFile);
+    }
+
+    //levels
+
+    public void SetCreatedLevels(JArray value)
+    {
+        if (saveFile["levels"] == null) saveFile["levels"] = new JObject();
+        saveFile["levels"]["createdLevels"] = value;
+    }
+
+    public JArray GetCreatedLevels()
+    {
+        if (saveFile["levels"] == null) return new JArray();
+        if (saveFile["levels"]["createdLevels"] == null) return new JArray();
+        return JArray.Parse(saveFile["levels"]["createdLevels"].ToString());
     }
 }

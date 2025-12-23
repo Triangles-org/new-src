@@ -1014,7 +1014,6 @@ GameObject:
   - component: {fileID: 310338051}
   - component: {fileID: 310338050}
   - component: {fileID: 310338049}
-  - component: {fileID: 310338048}
   m_Layer: 5
   m_Name: BackButton
   m_TagString: Untagged
@@ -1042,19 +1041,6 @@ RectTransform:
   m_AnchoredPosition: {x: 60, y: -60}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &310338048
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 310338046}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 804df76422d8b45cfb9f80c2b6fdc795, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ButtonToScene
-  sceneName: CreatorLayerMenu
 --- !u!114 &310338049
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2625,7 +2611,7 @@ MonoBehaviour:
   m_CharacterValidation: 0
   m_RegexValue: 
   m_GlobalPointSize: 14
-  m_CharacterLimit: 0
+  m_CharacterLimit: 16
   m_OnEndEdit:
     m_PersistentCalls:
       m_Calls: []
@@ -2803,7 +2789,7 @@ MonoBehaviour:
   m_CharacterValidation: 0
   m_RegexValue: 
   m_GlobalPointSize: 14
-  m_CharacterLimit: 0
+  m_CharacterLimit: 192
   m_OnEndEdit:
     m_PersistentCalls:
       m_Calls: []
@@ -3842,9 +3828,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CreatedLevelsMenu
   backButton: {fileID: 310338050}
+  defaultLayer: {fileID: 253947627}
   defaultCreateButton: {fileID: 79404069}
   defaultScrollContent: {fileID: 316375077}
   defaultSampleLevel: {fileID: 822390386}
+  levelLayer: {fileID: 692130939}
   levelDeleteButton: {fileID: 602857196}
   levelNameInput: {fileID: 1195607014}
   levelDescriptionInput: {fileID: 1249771697}
