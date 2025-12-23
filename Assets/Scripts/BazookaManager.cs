@@ -59,12 +59,12 @@ public class BazookaManager : MonoBehaviour
             }
             catch
             {
-                Debug.LogWarning("Failed to load save file");
+                Application.Quit();
             }
         }
         if (saveFile["version"] == null || saveFile["version"].ToString() != "0")
         {
-            saveFile["version"] = "0";
+            Application.Quit();
         }
     }
 
