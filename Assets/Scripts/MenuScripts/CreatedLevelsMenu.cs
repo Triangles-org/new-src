@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Numerics;
 using Newtonsoft.Json.Linq;
 using TMPro;
 using UnityEngine;
@@ -58,6 +57,7 @@ public class CreatedLevelsMenu : MonoBehaviour
             var item = currentLevels.FirstOrDefault(x => x["uuid"]?.ToString() == levelUuid);
             item?.Remove();
             BazookaManager.Instance.SetCreatedLevels(currentLevels);
+            BazookaManager.Instance.DeleteSave($"levels/{levelUuid}.json");
             LeaveLevel();
         });
         // if (LevelDataManager.Instance.targetSelectionUuid != null)
@@ -110,8 +110,8 @@ public class CreatedLevelsMenu : MonoBehaviour
 
     void LaunchEditor()
     {
-        // LevelDataManager.Instance.targetEditorUuid = levelUuid;
-        SceneManager.LoadScene("LevelEditor");
+        BazookaManager.Instance.tempData["targetEditorUuid"] = levelUuid;
+        SceneManager.LoadScene("EditorMenu");
     }
 
     void TitleChangeEvent(string newValue)

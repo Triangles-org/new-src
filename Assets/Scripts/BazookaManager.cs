@@ -13,6 +13,8 @@ public class BazookaManager : MonoBehaviour
         ["version"] = "0"
     };
 
+    public JObject tempData = new();
+
     void Awake()
     {
         if (Instance == null)
@@ -44,44 +46,55 @@ public class BazookaManager : MonoBehaviour
         }
     }
 
-    public JObject Load(String pathSuffix)
+    public JObject Load(string pathSuffix)
     {
-        string path = Path.Join(Application.persistentDataPath, pathSuffix);
+        string path = Path.Combine(Application.persistentDataPath, pathSuffix);
+        string dir = Path.GetDirectoryName(path);
+
+        if (!Directory.Exists(dir)) Directory.CreateDirectory(dir);
         if (!File.Exists(path))
         {
-            File.Create(path).Dispose();
+            File.WriteAllText(path, "{\"version\":\"0\"}");
+            return new()
+            {
+                ["version"] = "0"
+            };
         }
-        else
+
+        try
         {
-            try
-            {
-                var tempSaveFile = JObject.Parse(File.ReadAllText(path));
-                return tempSaveFile;
-            }
-            catch
-            {
-                return null;
-            }
+            return JObject.Parse(File.ReadAllText(path));
         }
-        return null;
+        catch (Exception e)
+        {
+            Debug.LogError(e);
+            return new()
+            {
+                ["version"] = "0"
+            };
+        }
     }
 
-    public void Save(String pathSuffix, JObject data)
+    public void Save(string pathSuffix, JObject data)
     {
         string path = Path.Join(Application.persistentDataPath, pathSuffix);
+        string dir = Path.GetDirectoryName(path);
+
+        if (!Directory.Exists(dir)) Directory.CreateDirectory(dir);
+
         using var fileStream = new FileStream(path, FileMode.Create, FileAccess.Write, FileShare.None);
-        var encoded = Encoding.UTF8.GetBytes(data.ToString(Newtonsoft.Json.Formatting.Indented));
+        var encoded = Encoding.UTF8.GetBytes(data.ToString(Newtonsoft.Json.Formatting.None));
         fileStream.Write(encoded, 0, encoded.Length);
         fileStream.Flush(true);
     }
 
-    public void ResetSave()
+    public void DeleteSave(string pathSuffix)
     {
-        saveFile = new JObject
-        {
-            ["version"] = "0"
-        };
-        Save("savefile.json", saveFile);
+        string path = Path.Join(Application.persistentDataPath, pathSuffix);
+        string dir = Path.GetDirectoryName(path);
+
+        if (!Directory.Exists(dir)) Directory.CreateDirectory(dir);
+        if (File.Exists(path)) File.Delete(path);
     }
 
     //levels
